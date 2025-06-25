@@ -6,7 +6,7 @@
 /*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:11:26 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/25 16:14:11 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/06/25 18:48:19 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int check_args(int argc, char *argv[])
 	int i;
 
 	i = 1;
-	if (argc != 5 || argc != 6)
+	if (argc < 5 || argc > 6)
 	{
 		printf("Error: Invalid number of arguments.\n");
 		return (1);
@@ -59,7 +59,7 @@ int check_args(int argc, char *argv[])
 	{
 		if (!is_positive_digit(argv[i]))
 		{
-			printf("Error: Argument %d ('%s') must be a positive integer.\n", i, argv[i]);
+			printf("Error: Invalid Argument\n");
 			return (1);
 		}
 		i++;
@@ -99,14 +99,15 @@ int valid_args(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-	return (check_args(argc, argv));
+	if (check_args(argc, argv) == 1)
+		return (1);
 	t_data *data;
 	t_philo **philos;
 
 	data = init_data(argv);
 	philos = malloc(sizeof(t_philo *) * data->philo_count);
 	philos = init_philosophers(data, philos);
-	// init_threads(data, philos);
+	init_threads(data, philos);
 	if (!data || !philos)
 		return (1);
 }

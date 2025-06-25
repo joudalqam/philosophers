@@ -6,7 +6,7 @@
 /*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:52:57 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/25 16:15:03 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/06/25 18:49:41 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,20 @@ void *philo_routine(void *arg)
 {
     t_philo *philo = (t_philo *)arg;  
 	long current_time;
-
-	current_time = timestamp_in_ms();
-    printf("%ld %d is thinking.\n",current_time, philo->id);
-	printf("%ld %d is eating.\n",current_time, philo->id);
-	printf("%ld %d is sleeping.\n",current_time, philo->id);
-    return NULL;
+	while(1)
+	{
+		current_time = timestamp_in_ms();
+		printf("%ld %d is thinking.\n", current_time, philo->id);
+		printf("%ld %d is eating.\n", current_time, philo->id);
+		printf("%ld %d is sleeping.\n", current_time, philo->id);
+	}
+	return NULL;
 }
 
 void init_threads(t_data *data, t_philo **philos)
 {
 	int i;
-
+	
 	i = 0;
 	while (i < data->philo_count)
 	{
@@ -87,12 +89,10 @@ void init_threads(t_data *data, t_philo **philos)
 		{
 			perror("Failed to create thread");
 			exit(EXIT_FAILURE);
-		}
-			
+		}	
 		i++;
 	}
-	i = 0;
-	while(i < data->philo_count)
+	while(i >= 0)
 	{
 		if(pthread_join(philos[i]->thread, NULL) != 0)
 		{
@@ -101,7 +101,7 @@ void init_threads(t_data *data, t_philo **philos)
 		}
 		else
 			pthread_join(philos[i]->thread, NULL);
-		i++;
+		i--;
 	}
 }
 
