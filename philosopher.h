@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 13:32:02 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/24 18:18:45 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/06/25 13:24:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_data
 	int meals_required;
 	int meals_eaten;
 	int start_time;
-	bool is_dead;
+	int is_dead;
 	pthread_mutex_t *forks;
 	pthread_mutex_t print_mutex;
 	t_philo *philo;
@@ -46,9 +46,9 @@ typedef struct s_philo
 	int meals_eaten;
 	int last_meal_time;
 	t_data *data;
-	pthread_t thread_id;
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
+	pthread_t       thread; 
 }	t_philo;
 
 int	ft_atoi(const char *str);
@@ -56,6 +56,7 @@ int is_positive_digit(char *argv);
 int check_args(int argc, char *argv[]);
 int valid_args(int argc, char **argv);
 t_data *init_data(char **argv);
-
+void *philo_routine(void *arg);
+void init_threads(t_data *data, t_philo **philos);
 
 # endif

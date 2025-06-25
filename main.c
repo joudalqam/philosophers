@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:11:26 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/24 18:17:30 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/06/25 12:53:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,33 +94,11 @@ int valid_args(int argc, char **argv)
 	return (0);
 }
 
-t_philo **init_philosophers(t_data *data, t_philo **philos)
-{
-	int i;
 
-	i = 0;
-	while (i < data->philo_count)
-	{
-		philos[i] = malloc(sizeof(t_philo));
-		if (!philos[i])
-			return (NULL);
-		philos[i]->id = i + 1;
-		philos[i]->meals_eaten = 0;
-		philos[i]->last_meal_time = 0;
-		philos[i]->data = data;
-		philos[i]->left_fork = &data->forks[i];
-		if (i == data->philo_count - 1)
-			philos[i]->right_fork = &data->forks[0];
-		else
-			philos[i]->right_fork = &data->forks[i + 1];
-		i++;
-	}
-	return (philos);
-}
+
 
 int main(int argc, char **argv)
 {
-
 	return (check_args(argc, argv));
 	t_data *data;
 	t_philo **philos;
@@ -131,5 +109,4 @@ int main(int argc, char **argv)
 	// init_threads(data, philos);
 	if (!data || !philos)
 		return (1);
-	
 }
