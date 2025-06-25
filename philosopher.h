@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 13:32:02 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/25 13:24:12 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/25 16:09:11 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <limits.h>
+#include <sys/time.h>
 
 typedef struct s_philo t_philo;
 
@@ -58,5 +59,6 @@ int valid_args(int argc, char **argv);
 t_data *init_data(char **argv);
 void *philo_routine(void *arg);
 void init_threads(t_data *data, t_philo **philos);
-
+t_philo **init_philosophers(t_data *data, t_philo **philos);
+long timestamp_in_ms(void);
 # endif

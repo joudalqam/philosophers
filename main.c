@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:11:26 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/25 12:53:00 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/25 16:14:11 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int check_args(int argc, char *argv[])
 	int i;
 
 	i = 1;
-	if (argc != 5 && argc != 6)
+	if (argc != 5 || argc != 6)
 	{
 		printf("Error: Invalid number of arguments.\n");
 		return (1);
