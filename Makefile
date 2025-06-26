@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread -g3
 CC = cc
 SRC = main.c init.c
 OBJ = $(SRC:.c=.o)

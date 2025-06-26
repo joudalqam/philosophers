@@ -6,7 +6,7 @@
 /*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 13:32:02 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/25 16:09:11 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/06/26 17:49:08 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ typedef struct s_data
 	int start_time;
 	int is_dead;
 	pthread_mutex_t *forks;
+	pthread_mutex_t dead_mutex;
 	pthread_mutex_t print_mutex;
-	t_philo *philo;
+	t_philo **philo;
 }	t_data;
 
 typedef struct s_philo
@@ -46,6 +47,7 @@ typedef struct s_philo
 	int id;
 	int meals_eaten;
 	int last_meal_time;
+	int *is_dead;
 	t_data *data;
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
@@ -61,4 +63,10 @@ void *philo_routine(void *arg);
 void init_threads(t_data *data, t_philo **philos);
 t_philo **init_philosophers(t_data *data, t_philo **philos);
 long timestamp_in_ms(void);
+void print_action(t_philo *philo, char *action);
+void philo_taking_forks(t_philo *philo);
+int	is_dead(t_philo *philo);
+int philo_eating(t_philo *philo);
+void philo_put_forks(t_philo *philo);
+void *monitor_routine(void *arg);
 # endif

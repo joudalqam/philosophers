@@ -6,7 +6,7 @@
 /*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:11:26 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/25 18:48:19 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/06/26 16:59:43 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,16 @@ int main(int argc, char **argv)
 {
 	if (check_args(argc, argv) == 1)
 		return (1);
+	// pthread_t monitor_thread;
 	t_data *data;
 	t_philo **philos;
-
 	data = init_data(argv);
 	philos = malloc(sizeof(t_philo *) * data->philo_count);
 	philos = init_philosophers(data, philos);
+	data->philo = philos;
 	init_threads(data, philos);
+	
 	if (!data || !philos)
 		return (1);
+
 }
