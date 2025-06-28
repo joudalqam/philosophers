@@ -6,7 +6,7 @@
 /*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:11:26 by jalqam            #+#    #+#             */
-/*   Updated: 2025/06/26 16:59:43 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/06/28 18:09:19 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,12 @@ int check_args(int argc, char *argv[])
 
 	i = 1;
 	if (argc < 5 || argc > 6)
-	{
-		printf("Error: Invalid number of arguments.\n");
 		return (1);
-	}
+	
 	while(i < argc)
 	{
 		if (!is_positive_digit(argv[i]))
-		{
-			printf("Error: Invalid Argument\n");
 			return (1);
-		}
 		i++;
 	}
 	return (0);
@@ -75,7 +70,7 @@ int valid_args(int argc, char **argv)
 	int time_to_sleep;
 	int num_meals;
 	
-	if(!check_args(argc, argv))
+	if(check_args(argc, argv) == 1)
 		return (1);
 	num_philosophers = ft_atoi(argv[1]);
 	time_to_die = ft_atoi(argv[2]);
@@ -94,23 +89,44 @@ int valid_args(int argc, char **argv)
 	return (0);
 }
 
-
-
-
 int main(int argc, char **argv)
 {
-	if (check_args(argc, argv) == 1)
-		return (1);
-	// pthread_t monitor_thread;
-	t_data *data;
-	t_philo **philos;
-	data = init_data(argv);
-	philos = malloc(sizeof(t_philo *) * data->philo_count);
-	philos = init_philosophers(data, philos);
-	data->philo = philos;
-	init_threads(data, philos);
-	
-	if (!data || !philos)
-		return (1);
+    if(valid_args(argc, argv) == 1)
+    {
+        write(2, "Error: Invalid arguments.\n", 26);
+        return (1);
+    }
+    t_data data;
+    t_philo **philos;
 
+    if (init_data(&data, argv)) 
+        return (1);
+
+    philos = malloc(sizeof(t_philo *) * data.philo_count);
+    if (!philos)
+        return (1);
+
+    if (init_philosophers(&data, philos))
+        return (1);
+
+    init_threads(&data, philos);
+    return 0;
 }
+
+// int main(int argc, char **argv)
+// {
+// 	if(valid_args(argc, argv) == 1)
+// 	{
+// 		printf("Error: Invalid arguments.\n");
+// 		return (1);
+// 	}		
+// 	// pthread_t monitor_thread;
+// 	t_data data;
+// 	t_philo **philos;
+// 	if (init_data(argv))
+// 		return (1);
+// 	philos = malloc(sizeof(t_philo *) * data.philo_count);
+// 	if (init_philosophers(&data, philos))
+// 		return (1);
+// 	init_threads(&data, philos);
+// }
