@@ -1,6 +1,6 @@
 CFLAGS = -Wall -Wextra -Werror -pthread -g3
 CC = cc
-SRC = main.c init.c utils.c valid_input.c routine.c free.c
+SRC = main.c init.c utils.c valid_input.c routine.c free.c monitor.c
 OBJ = $(SRC:.c=.o)
 NAME=philo
 
@@ -16,6 +16,6 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
-
+ 
 .PHONY: all clean fclean re
 

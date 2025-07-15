@@ -6,15 +6,15 @@
 /*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:39:18 by jalqam            #+#    #+#             */
-/*   Updated: 2025/07/01 17:40:00 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/07/02 13:26:47 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int ft_free(t_philo **philos, t_data *data)
+int	ft_free(t_philo **philos, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (philos)

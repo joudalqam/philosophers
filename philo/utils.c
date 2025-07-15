@@ -6,39 +6,40 @@
 /*   By: jalqam <jalqam@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 16:56:12 by jalqam            #+#    #+#             */
-/*   Updated: 2025/07/01 17:39:52 by jalqam           ###   ########.fr       */
+/*   Updated: 2025/07/02 15:14:59 by jalqam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-long timestamp_in_ms(void)
+long	timestamp_in_ms(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
+
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void print_action(t_philo *philo, char *action)
+void	print_action(t_philo *philo, char *action)
 {
-    long current_time;
+	long	current_time;
 
-    pthread_mutex_lock(&philo->data->dead_mutex);
-    if (philo->data->is_dead)
-    {
-        pthread_mutex_unlock(&philo->data->dead_mutex);
-        return;
-    }
-    pthread_mutex_lock(&philo->data->print_mutex);
-    current_time = timestamp_in_ms() - philo->data->start_time;
-    printf("%ld %d %s\n", current_time, philo->id, action);
-    pthread_mutex_unlock(&philo->data->print_mutex);
-    pthread_mutex_unlock(&philo->data->dead_mutex);
+	pthread_mutex_lock(&philo->data->dead_mutex);
+	if (philo->data->is_dead)
+	{
+		pthread_mutex_unlock(&philo->data->dead_mutex);
+		return ;
+	}
+	pthread_mutex_lock(&philo->data->print_mutex);
+	current_time = timestamp_in_ms() - philo->data->start_time;
+	printf("%ld %d %s\n", current_time, philo->id, action);
+	pthread_mutex_unlock(&philo->data->print_mutex);
+	pthread_mutex_unlock(&philo->data->dead_mutex);
 }
 
-void philo_taking_forks(t_philo *philo)
+void	philo_taking_forks(t_philo *philo)
 {
-	if(philo->id % 2 == 1)
+	if (philo->id % 2 == 1)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_action(philo, "has taken a fork.");
@@ -64,15 +65,15 @@ int	is_dead(t_philo *philo)
 	return (status);
 }
 
-void ft_usleep(long long time, t_philo *philo)
+void	ft_usleep(long long time, t_philo *philo)
 {
-	long long start ;
+	long long	start;
+
 	start = timestamp_in_ms();
 	while (timestamp_in_ms() - start < time)
 	{
 		if (is_dead(philo))
-            break;
+			break ;
 		usleep(100);
 	}
 }
-
